@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker rmi -f nginxreg
+docker stop nginxreg
+docker rm nginxreg
+echo "docker build -t nginxreg ."
+docker build -t nginxreg .

@@ -1,0 +1,38 @@
+version: '3'
+services:
+    nginx:
+        image: nginxreg
+        container_name: nginxreg
+        networks:
+                registry_net:
+                        ipv4_address: 11.11.11.10
+                        aliases:
+                                - nginx
+        ports:
+            - 80:80
+        tty: true
+        stdin_open: true
+        restart: always
+
+    registry:
+        image: registry:2
+        container_name: registry
+        networks:
+                registry_net:
+                        ipv4_address: 11.11.11.20
+                        aliases:
+                                - registry
+        ports:
+            - "5000:5000"
+        volumes:
+            - /opt/cicd/registry:/var/lib/registry
+        tty: true
+        stdin_open: true
+        restart: always
+networks:
+    registry_net:
+        driver: bridge
+        ipam:
+            driver: default
+            config: [{subnet: 11.11.11.0/24}]
+

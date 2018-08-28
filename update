@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker cp nginx.conf nginxreg:/etc/nginx/nginx.conf
+docker restart nginxreg
